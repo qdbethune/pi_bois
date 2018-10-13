@@ -1,5 +1,5 @@
 # Synesthete
-Created by Ethan Johnson, Kyle Toohey, Quentin Bethune, and William Sullivan with help from Ben Lavine
+Created by Ethan Johnson, Kyle Toohey, Quentin Bethune, and William Sullivan with help from Ben Levine
 
 Created during Hack UMass VI
 
