@@ -1,9 +1,11 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
 import QtQuick.Window 2.2
 
-Window {
-    id: window
+Window { /* Used to show how different types of lights work on the form
+            with demo music*/
+    id: demo_window
     visible: true
     width: 320
     height: 480
@@ -17,6 +19,15 @@ Window {
         width: 154
         height: 72
         text: qsTr("Start")
+        style: ButtonStyle {
+              label: Text {
+                renderType: Text.NativeRendering
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.pointSize: 20
+                text: control.text
+              }
+        }
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 40
@@ -24,7 +35,9 @@ Window {
 
     Connections {
         target: btn_go
-        onClicked: print("clicked")
+        onClicked: { // TODO: Change so it starts music and executes visualization
+            print("clicked") // REPLACE HERE
+        }
     }
 
     Rectangle {
