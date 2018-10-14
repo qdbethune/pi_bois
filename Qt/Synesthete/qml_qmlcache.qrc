@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="audio_samples/mario_screaming.mp3">audio_samples/mario_screaming.mp3</file>
+        <file alias="audio_samples/Mid-Air_Machine_-_Breathing_Out.mp3">audio_samples/Mid-Air_Machine_-_Breathing_Out.mp3</file>
+        <file alias="audio_samples/Mid-Air_Machine_-_Chasing_the_Train.mp3">audio_samples/Mid-Air_Machine_-_Chasing_the_Train.mp3</file>
+        <file alias="audio_samples/Spider_Man_2_Pizza_Theme.mp3">audio_samples/Spider_Man_2_Pizza_Theme.mp3</file>
+    </qresource>
+    <qresource prefix="/audio_samples"/>
+    <qresource prefix="/audios"/>
+</RCC>

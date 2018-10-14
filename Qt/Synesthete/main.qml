@@ -1,24 +1,42 @@
 import QtQuick 2.6
+import QtQml 2.2
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
-import Qt.labs.folderlistmodel 2.11
+import Qt.labs.folderlistmodel 2.2
 import QtMultimedia 5.8
+
+//import 'syne_functions.py' as sf
 
 Window { /* Used to show how different types of lights work on the form
             with demo music*/
+    property int playing: 0
     id: demo_window
     visible: true
     width: 320
     height: 480
     color: "#a4a4a4"
     opacity: 1
-    title: qsTr("Hello World")
+    title: qsTr("Synesthete Demo")
 
     Button {
         id: btn_go
         height: 72
-        text: qsTr("Start")
+        text: qsTr("Play")
+
+        onClicked: { // TODO: Figure out commands to execute and stop visualization
+            if(!playing) {
+
+                current_audio.play()
+                btn_go.text = 'Stop'
+                playing = 1
+            }
+            else{
+                current_audio.pause()
+                btn_go.text = 'Start'
+                playing = 0
+            }
+        }
         anchors.left: parent.horizontalCenter
         anchors.leftMargin: 25
         anchors.right: parent.right
@@ -30,7 +48,7 @@ Window { /* Used to show how different types of lights work on the form
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 20
                 text: control.text
-              }
+            }
         }
         anchors.top: parent.top
         anchors.topMargin: 15
@@ -43,9 +61,17 @@ Window { /* Used to show how different types of lights work on the form
             folder: 'audio_samples'
         }
 
+        onActivated: {
+            //            regions = 4
+            //            sig =
+            //            //fileio.write() // TODO: output over wi-fi
+            //            sf.translation_rgb(sig, abc)
+            playing = 0
+            btn_go.text = 'Start'
+        }
+
         model:folderModel
         textRole: 'fileName'
-
         x: 10
         width: 125
         height: 25
@@ -58,14 +84,24 @@ Window { /* Used to show how different types of lights work on the form
     Audio {
         id: current_audio
         source: 'audio_samples/' + song_select.currentText
-    }
+        autoLoad: True
 
-    Connections {
-        target: btn_go
-        onClicked: { // TODO: Change so it starts music and executes visualization
-            current_audio.play()
+        onStopped: {
+            playing = 0
+            btn_go.text = 'Start'
         }
     }
+
+    //    Timer {
+    //        id: tmr_signal
+    //        interval: 100
+    //        repeat: true
+    //        running: playing
+    //        onTriggered: {
+
+    //            lights = sf.translation1_rgb(4)
+    //        }
+    //    }
 
     // The LED lights
     Rectangle {
@@ -80,6 +116,17 @@ Window { /* Used to show how different types of lights work on the form
         border.width: 1
     }
 
+    Text {
+        id: text3
+        x: 149
+        y: 270
+        text: qsTr("Stereo")
+        anchors.bottom: stereo_left.top
+        anchors.bottomMargin: 15
+        anchors.horizontalCenter: parent.horizontalCenter
+        font.pixelSize: 12
+    }
+
     Rectangle {
         id: tri_mid
         x: 135
@@ -91,6 +138,17 @@ Window { /* Used to show how different types of lights work on the form
         anchors.bottomMargin: 45
         anchors.horizontalCenter: parent.horizontalCenter
         border.width: 1
+
+        Text {
+            id: text2
+            x: 14
+            y: -21
+            text: qsTr("Surround")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.top
+            anchors.bottomMargin: 5
+            font.pixelSize: 12
+        }
     }
 
     Rectangle {
@@ -130,6 +188,18 @@ Window { /* Used to show how different types of lights work on the form
         anchors.top: btn_go.bottom
         anchors.topMargin: 30
         border.width: 1
+
+        Text {
+            id: text1
+            x: 14
+            y: -20
+            text: qsTr("Single Light")
+            anchors.horizontalCenterOffset: 0
+            anchors.bottom: parent.top
+            anchors.bottomMargin: 5
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 12
+        }
     }
 
     Rectangle {
@@ -155,7 +225,17 @@ Window { /* Used to show how different types of lights work on the form
         anchors.topMargin: 31
         anchors.horizontalCenter: parent.horizontalCenter
         border.width: 1
+
+        Text {
+            id: text4
+            x: 99
+            y: -21
+            text: qsTr("Strip")
+            font.pixelSize: 12
+        }
     }
+
+
 
 
 
@@ -164,8 +244,8 @@ Window { /* Used to show how different types of lights work on the form
 }
 
 /*##^## Designer {
-    D{i:2;anchors_height:72;anchors_width:120;anchors_x:185;anchors_y:42}D{i:14;anchors_y:11}
-D{i:5;anchors_height:50;anchors_x:53;anchors_y:372}D{i:9;anchors_x:93;anchors_y:298}
-D{i:10;anchors_y:298}D{i:11;anchors_width:50;anchors_x:132;anchors_y:156}D{i:8;anchors_y:226}
+    D{i:2;anchors_height:72;anchors_width:120;anchors_x:185;anchors_y:42}D{i:5;anchors_height:50;anchors_x:53;anchors_y:372}
+D{i:8;anchors_y:226}D{i:9;anchors_x:93;anchors_y:298}D{i:10;anchors_y:298}D{i:14;anchors_y:-20}
+D{i:11;anchors_width:50;anchors_x:132;anchors_y:156}
 }
  ##^##*/

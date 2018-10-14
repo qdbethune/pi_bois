@@ -5,6 +5,7 @@
         <file>audio_samples/Mid-Air_Machine_-_Breathing_Out.mp3</file>
         <file>audio_samples/Mid-Air_Machine_-_Chasing_the_Train.mp3</file>
         <file>audio_samples/Spider_Man_2_Pizza_Theme.mp3</file>
+        <file>syne_functions.py</file>
     </qresource>
     <qresource prefix="/audio_samples"/>
     <qresource prefix="/audios"/>
